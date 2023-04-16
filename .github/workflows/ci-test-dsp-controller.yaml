@@ -1,0 +1,28 @@
+name: ci-test-dsp-controller
+
+on:
+  push:
+    branches:
+      - "dev"
+      - "discovered-policy-crd-copy"
+    paths:
+      - "pkg/discoveredpolicy/**"
+  workflow_dispatch:
+
+jobs:
+  dsp-controller-test:
+    name: Build DiscoveredPolicy Controller
+    defaults:
+      run:
+        working-directory: ./pkg/discoveredpolicy
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: v1.18
+
+      - uses: actions/checkout@v3
+
+      - name: Build DiscoveredPolicy controller
+        run: make docker-build TAG=latest
