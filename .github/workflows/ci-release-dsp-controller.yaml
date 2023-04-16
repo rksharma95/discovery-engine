@@ -38,4 +38,4 @@ jobs:
           password: ${{ secrets.DOCKER_AUTHTOK }}
 
       - name: Build & Push policy controller
-        run: PLATFORM=$PLATFORM make docker-buildx TAG=test-latest  
+        run: PLATFORM=$PLATFORM make docker-buildx TAG=test-latest
