@@ -37,9 +37,9 @@ jobs:
       - name: Get logs
         if: ${{ failure() }}
         run: |
-          kubectl describe pod -n kube-system -l app=discovery-engine
-          kubectl logs -n kube-system -l app=discovery-engine -c manager
-          kubectl logs -n kube-system -l app=discovery-engine -c discovery-engine
+          kubectl describe pod -n accuknox-agents -l app=discovery-engine
+          kubectl logs -n accuknox-agents -l app=discovery-engine -c manager
+          kubectl logs -n accuknox-agents -l app=discovery-engine -c discovery-engine
 
 
 #TODO: add the following tests after they are fixed
