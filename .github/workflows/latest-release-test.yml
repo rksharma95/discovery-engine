@@ -37,8 +37,8 @@ jobs:
 
       - name: Run discovery engine
         run: |
-          docker save accuknox/knoxautopolicy:latest | sudo k3s ctr images import -
-          kustomize build ./deployments/k8s/default/discovery-engine | sed -e 's/\(image: *\).*/\1accuknox\/knoxautopolicy:latest/' -e 's/\(imagePullPolicy: *\).*/\1Never/' | kubectl apply -f - 
+          docker save accuknox/knoxautopolicy:${{ steps.vars.outputs.tag }} | sudo k3s ctr images import -
+          kustomize build ./deployments/k8s/default/discovery-engine | sed -e 's/\(image: *\).*/\1accuknox\/knoxautopolicy:${{ steps.vars.outputs.tag }}/' -e 's/\(imagePullPolicy: *\).*/\1Never/' | kubectl apply -f - 
           kubectl wait --for=condition=ready --timeout=5m -n accuknox-agents pod -l app=discovery-engine            
           kubectl get pods -A
           
